@@ -1,0 +1,103 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #0000004d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Cabinet Grotesk Bold";
+  visibility: hidden;
+}
+
+.modal__opened {
+  visibility: visible;
+}
+
+.modal__title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background-color: transparent;
+  border: none;
+}
+
+.modal__content {
+  background-color: #fff;
+  position: relative;
+  padding: 28px 28px 38px;
+  max-width: 490px;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.modal__input {
+  display: block;
+  width: 440px;
+  border-bottom: 1px solid #000;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-top: 8px;
+}
+
+.modal__close-button {
+  color: #0000004d;
+}
+
+.modal__label {
+  padding-bottom: 24px;
+}
+
+.modal__legend {
+  padding-bottom: 12px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__radio-buttons {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.modal__label.modal__label_type_radio {
+  padding-bottom: 8px;
+}
+
+.modal__submit {
+  background-color: #000000;
+  font-size: 16px;
+  line-height: 20px;
+  width: 124px;
+  height: 36px;
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  margin-top: 32px;
+}
+
+.modal__submit:hover {
+  color: #00000099;
+}
+
+.modal__submit:disabled {
+  color: #0000004d;
+}

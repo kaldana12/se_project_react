@@ -1,0 +1,28 @@
+.modal__content.modal__content_type_image {
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+}
+
+.modal__image {
+  width: 100%;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal__footer {
+  padding: 0 0 32px 32px;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.modal__caption {
+  margin: 0;
+  padding: 20px 0 12px;
+  font-family: "Cabinet Grotesk Bold";
+}
+
+.modal__weather {
+  margin: 0;
+}
