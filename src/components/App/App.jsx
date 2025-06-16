@@ -69,7 +69,7 @@ function App() {
             id="name"
             placeholder="Name"
             value={name}
-            onChnage={(e) => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </label>
         <label htmlFor="imageUrl" className="modal__label">
@@ -91,6 +91,7 @@ function App() {
               className="modal__radio-input"
               id="hot"
               name="weather"
+              value="hot"
               checked={weatherType === "hot"}
               onChange={(e) => setWeatherType(e.target.value)}
             />
@@ -106,6 +107,7 @@ function App() {
               className="modal__radio-input"
               id="warm"
               name="weather"
+              value="warm"
               checked={weatherType === "warm"}
               onChange={(e) => setWeatherType(e.target.value)}
             />
@@ -121,6 +123,7 @@ function App() {
               className="modal__radio-input"
               id="cold"
               name="weather"
+              value="cold"
               checked={weatherType === "cold"}
               onChange={(e) => setWeatherType(e.target.value)}
             />{" "}
