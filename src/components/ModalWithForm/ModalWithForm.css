@@ -10,10 +10,13 @@
   align-items: center;
   font-family: "Cabinet Grotesk Bold";
   visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s;
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
+  opacity: 1;
 }
 
 .modal__title {
