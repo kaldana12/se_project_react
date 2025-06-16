@@ -1,5 +1,6 @@
 import "./ModalWithForm.css";
 import close from "../../assets/close.png";
+import { useEffect } from "react";
 
 function ModalWithForm({ children, buttonText, title, isOpen, onClose }) {
   useEffect(() => {

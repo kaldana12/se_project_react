@@ -1,7 +1,6 @@
 import "../../vendor/fonts.css";
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ weatherData, handleCardClick, clothingItems }) {

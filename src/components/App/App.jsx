@@ -21,6 +21,7 @@ function App() {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [weatherType, setWeatherType] = useState("");
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -79,7 +80,7 @@ function App() {
             id="imageUrl"
             placeholder="Image URL"
             value={imageUrl}
-            onChnage={(e) => setImageUrl(e.target.value)}
+            onChange={(e) => setImageUrl(e.target.value)}
           />
         </label>
         <fieldset className="modal__radio-buttons">
@@ -90,6 +91,8 @@ function App() {
               className="modal__radio-input"
               id="hot"
               name="weather"
+              checked={weatherType === "hot"}
+              onChange={(e) => setWeatherType(e.target.value)}
             />
             Hot
           </label>
@@ -103,6 +106,8 @@ function App() {
               className="modal__radio-input"
               id="warm"
               name="weather"
+              checked={weatherType === "warm"}
+              onChange={(e) => setWeatherType(e.target.value)}
             />
             Warm
           </label>
@@ -116,6 +121,8 @@ function App() {
               className="modal__radio-input"
               id="cold"
               name="weather"
+              checked={weatherType === "cold"}
+              onChange={(e) => setWeatherType(e.target.value)}
             />{" "}
             Cold
           </label>
