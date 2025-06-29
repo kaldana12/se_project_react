@@ -2,7 +2,14 @@ import "./ModalWithForm.css";
 import close from "../../assets/close.png";
 import { useEffect } from "react";
 
-function ModalWithForm({ children, buttonText, title, isOpen, onClose }) {
+function ModalWithForm({
+  children,
+  buttonText = "save",
+  title,
+  isOpen,
+  onClose,
+  onSubmit,
+}) {
   useEffect(() => {
     const handleEscClose = (e) => {
       if (e.key === "Escape") {
@@ -23,10 +30,11 @@ function ModalWithForm({ children, buttonText, title, isOpen, onClose }) {
     <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content">
         <h2 className="modal__title">{title}</h2>
-        <button onClick={onClose} type="button" className="modal__close">
+        <button type="button" onClick={onClose} className="modal__close">
           <img src={close} alt="" className="modal__close-button" />
         </button>
-        <form className="modal__form">
+
+        <form onSubmit={onSubmit} className="modal__form">
           {children}
           <button type="submit" className="modal__submit">
             {buttonText}

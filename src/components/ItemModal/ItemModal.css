@@ -12,17 +12,33 @@
 }
 
 .modal__footer {
-  padding: 0 0 32px 32px;
+  padding: 20px 32px 32px;
   font-size: 20px;
   line-height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modal__info {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal__caption {
   margin: 0;
-  padding: 20px 0 12px;
   font-family: "Cabinet Grotesk Bold";
 }
 
 .modal__weather {
-  margin: 0;
+  margin: 8px 0 0;
+}
+
+.modal__delete {
+  color: #ff4d00;
+  font-family: "Cabinet Grotesk Bold";
+  border: none;
+  cursor: pointer;
+  background-color: #fff;
+  align-self: flex-start;
 }
