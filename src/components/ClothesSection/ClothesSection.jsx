@@ -1,15 +1,16 @@
 import ItemCard from "../ItemCard/ItemCard";
-import { defaultClothingItems } from "../../utils/constants";
 import "./ClothesSection.css";
 
-const clothingItems = defaultClothingItems;
-
-function ClothesSection({ onCardClick }) {
+function ClothesSection({ onCardClick, clothingItems, handleAddClick }) {
   return (
     <div className="clothes-section">
       <div className="clothes-section__input">
         <p>Your items</p>
-        <button className="clothes-section__button" type="button">
+        <button
+          className="clothes-section__button"
+          type="button"
+          onClick={handleAddClick}
+        >
           + Add new
         </button>
       </div>

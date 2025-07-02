@@ -9,12 +9,17 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatheApi";
-import { defaultClothingItems } from "../../utils/constants";
+import { defaultClothingItems as defaultItems } from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.js";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
 import { addItem, getItems, deleteItem } from "../../utils/api";
+
+const normalizedDefaultItems = defaultItems.map((item) => ({
+  ...item,
+  link: item.link || item.imageUrl,
+}));
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -28,7 +33,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState(normalizedDefaultItems);
   const [weatherType, setWeatherType] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
@@ -52,7 +57,12 @@ function App() {
   const handleAddItemModalSubmit = ({ name, imageUrl, weatherType }) => {
     addItem({ name, imageUrl, weather: weatherType })
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        const normalizedItem = {
+          ...newItem,
+          imageUrl: newItem.imageUrl || newItem.link,
+        };
+
+        setClothingItems([normalizedItem, ...clothingItems]);
         closeActiveModal();
         setName("");
         setImageUrl("");
@@ -83,7 +93,13 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then((data) => setClothingItems(data))
+      .then((data) => {
+        const normalizedData = data.map((item) => ({
+          ...item,
+          link: item.link || item.imageUrl,
+        }));
+        setClothingItems(normalizedData);
+      })
       .catch(console.error);
   }, []);
 
@@ -110,7 +126,13 @@ function App() {
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  onCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                  handleAddClick={handleAddClick}
+                />
+              }
             />
           </Routes>
         </div>
