@@ -65,6 +65,24 @@
       "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
       "weather": "warm",
       "_id": 19
+    },
+    {
+      "name": "new hoodie",
+      "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+      "weather": "hot",
+      "_id": 20
+    },
+    {
+      "name": "new hoodie",
+      "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+      "weather": "hot",
+      "_id": 21
+    },
+    {
+      "name": "new hoodie",
+      "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+      "weather": "hot",
+      "_id": 22
     }
   ]
 }
