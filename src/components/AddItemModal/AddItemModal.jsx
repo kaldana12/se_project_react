@@ -1,30 +1,32 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useForm } from "../../hooks/useForm"; // adjust path as needed
 
 export default function AddItemModal({
   onClose,
   isOpen,
   onAddItemModalSubmit,
 }) {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weatherType, setWeatherType] = useState("hot");
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    imageUrl: "",
+    weatherType: "hot",
+  });
 
   useEffect(() => {
     if (isOpen) {
-      setName("");
-      setImageUrl("");
-      setWeatherType("hot");
+      setValues({ name: "", imageUrl: "", weatherType: "hot" });
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleImageUrlChange = (e) => setImageUrl(e.target.value);
-  const handleWeatherTypeChange = (e) => setWeatherType(e.target.value);
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItemModalSubmit({ name, imageUrl, weatherType });
+    onAddItemModalSubmit({
+      name: values.name,
+      imageUrl: values.imageUrl,
+      weatherType: values.weatherType,
+    });
   };
 
   return (
@@ -41,10 +43,10 @@ export default function AddItemModal({
           type="text"
           className="modal__input"
           id="clothing-name"
-          placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
           name="name"
+          placeholder="Name"
+          value={values.name}
+          onChange={handleChange}
           minLength="1"
           maxLength="30"
         />
@@ -55,51 +57,32 @@ export default function AddItemModal({
           type="url"
           className="modal__input"
           id="imageUrl"
+          name="imageUrl"
           placeholder="Image URL"
-          value={imageUrl}
-          onChange={handleImageUrlChange}
+          value={values.imageUrl}
+          onChange={handleChange}
         />
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
-          <input
-            type="radio"
-            className="modal__radio-input"
-            id="hot"
-            name="weather"
-            value="hot"
-            checked={weatherType === "hot"}
-            onChange={handleWeatherTypeChange}
-          />
-          Hot
-        </label>
-
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
-          <input
-            type="radio"
-            className="modal__radio-input"
-            id="warm"
-            name="weather"
-            value="warm"
-            checked={weatherType === "warm"}
-            onChange={handleWeatherTypeChange}
-          />
-          Warm
-        </label>
-
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
-          <input
-            type="radio"
-            className="modal__radio-input"
-            id="cold"
-            name="weather"
-            value="cold"
-            checked={weatherType === "cold"}
-            onChange={handleWeatherTypeChange}
-          />{" "}
-          Cold
-        </label>
+        {["hot", "warm", "cold"].map((type) => (
+          <label
+            key={type}
+            htmlFor={type}
+            className="modal__label modal__label_type_radio"
+          >
+            <input
+              type="radio"
+              className="modal__radio-input"
+              id={type}
+              name="weatherType"
+              value={type}
+              checked={values.weatherType === type}
+              onChange={handleChange}
+            />
+            {type[0].toUpperCase() + type.slice(1)}
+          </label>
+        ))}
       </fieldset>
     </ModalWithForm>
   );

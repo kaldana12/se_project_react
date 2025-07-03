@@ -13,7 +13,7 @@ function Header({ handleAddClick, weatherData }) {
     <header className="header">
       <div className="header__container">
         <Link to="/">
-          <img className="header__logo" src={logo} />
+          <img className="header__logo" src={logo} alt="logo" />
         </Link>
 
         <p className="header__date-and-location">
