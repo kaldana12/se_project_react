@@ -1,7 +1,16 @@
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
+import { useContext } from "react";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 function ClothesSection({ onCardClick, clothingItems, handleAddClick }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const userItems = clothingItems.filter(
+    (item) =>
+      item.owner === currentUser?._id || item.owner?._id === currentUser?._id
+  );
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__input">

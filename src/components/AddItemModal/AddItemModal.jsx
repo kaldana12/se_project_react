@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useForm } from "../../hooks/useForm"; // adjust path as needed
+import { useForm } from "../../hooks/useForm";
+import "./AddItemModal.css";
 
 export default function AddItemModal({
   onClose,
@@ -84,6 +84,17 @@ export default function AddItemModal({
           </label>
         ))}
       </fieldset>
+      <div className="modal__button-wrapper">
+        <button
+          type="submit"
+          className="modal__submit-button"
+          disabled={
+            !((values.name || "").trim() && (values.imageUrl || "").trim())
+          }
+        >
+          Add garment
+        </button>
+      </div>
     </ModalWithForm>
   );
 }

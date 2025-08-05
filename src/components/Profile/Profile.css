@@ -2,3 +2,23 @@
   display: flex;
   gap: 116px;
 }
+
+.profile__sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile__edit-button {
+  border: none;
+  color: #000;
+  font-family: "Cabinet Grotesk", sans-serif;
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
+
+.profile__logout-button {
+  border: none;
+  color: #000;
+  font-family: "Cabinet Grotesk", sans-serif;
+}
