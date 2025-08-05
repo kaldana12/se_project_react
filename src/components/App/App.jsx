@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header";
@@ -54,6 +54,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -131,7 +132,6 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        console.log("Clicked card:", JSON.stringify(card, null, 2));
         const normalizedData = data.map((item) => ({
           ...item,
           link: item.link || item.imageUrl,
@@ -183,28 +183,42 @@ function App() {
       })
       .then((data) => {
         console.log("User signed in!", data);
+        localStorage.setItem("jwt", data.token);
         setIsLoggedIn(true);
+
+        return getUserInfo(data.token);
+      })
+      .then((userData) => {
+        setCurrentUser(userData);
         closeActiveModal();
       })
       .catch((err) => {
         console.error("Registration/Login failed:", err);
       });
   };
+
   const handleSwitchToLogin = () => {
     setActiveModal("login");
   };
 
   const handleLoginSubmit = ({ email, password }) => {
     signin({ email, password })
-      .then(() => {
+      .then((data) => {
+        console.log("User logged in!", data);
+        localStorage.setItem("jwt", data.token);
         setIsLoggedIn(true);
+
+        return getUserInfo(data.token);
+      })
+      .then((userData) => {
+        setCurrentUser(userData);
         closeActiveModal();
-        console.log("User logged in!");
       })
       .catch((err) => {
         console.error("Login failed:", err);
       });
   };
+
   const handleSwitchToRegister = () => {
     setActiveModal("register");
   };

@@ -1,9 +1,11 @@
 import "./ItemCard.css";
 import likeIcon from "../../assets/likebutton.svg";
 import { useContext } from "react";
+import CurrentUserContext from "../../context/CurrentUserContext"; // import context
 
-function ItemCard({ item, onCardClick, onCardLike, currentUser }) {
-  console.log(item);
+function ItemCard({ item, onCardClick, onCardLike }) {
+  const currentUser = useContext(CurrentUserContext);
+
   const isLoggedIn = Boolean(currentUser?._id);
 
   const isLiked = isLoggedIn && item.likes.includes(currentUser._id);
