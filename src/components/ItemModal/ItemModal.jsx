@@ -3,7 +3,7 @@ import close from "../../assets/close.png";
 import { useContext } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext";
 
-function ItemModal({ isOpen, onClose, card, onDelete }) {
+function ItemModal({ isOpen, onClose, card, onDeleteClick }) {
   const currentUser = useContext(CurrentUserContext);
   if (!isOpen || !card || !card.link) return null;
 
@@ -27,7 +27,10 @@ function ItemModal({ isOpen, onClose, card, onDelete }) {
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
           {isOwn && (
-            <button className="modal__delete" onClick={() => onDelete(card)}>
+            <button
+              className="modal__delete"
+              onClick={() => onDeleteClick(card)}
+            >
               Delete item
             </button>
           )}

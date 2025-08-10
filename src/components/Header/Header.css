@@ -53,8 +53,8 @@
 }
 
 .header__avatar-placeholder {
-  width: 40px;
-  height: 40px;
+  max-width: 40px;
+  max-height: 40px;
   background-color: #000;
   color: #fff;
   font-size: 18px;
@@ -64,6 +64,12 @@
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+}
+
+.header__avatar {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
 }
 
 .header__register-btn {

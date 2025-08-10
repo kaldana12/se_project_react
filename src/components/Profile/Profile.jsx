@@ -5,10 +5,12 @@ import "./Profile.css";
 
 function Profile({
   onCardClick,
+  onCardLike,
   clothingItems,
   handleAddClick,
   onEditProfile,
   onSignOut,
+  openConfirmModal,
 }) {
   return (
     <div className="profile">
@@ -32,8 +34,10 @@ function Profile({
       <section className="profile__clothing-items">
         <ClothesSection
           onCardClick={onCardClick}
+          onCardLike={onCardLike}
           clothingItems={clothingItems}
           handleAddClick={handleAddClick}
+          onDeleteClick={openConfirmModal}
         />
       </section>
     </div>

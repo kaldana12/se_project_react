@@ -9,7 +9,6 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatheApi";
-import { defaultClothingItems as defaultItems } from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnit.js";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
@@ -30,11 +29,7 @@ import LoginModal from "../LoginModal/LoginModal.jsx";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
-
-const normalizedDefaultItems = defaultItems.map((item) => ({
-  ...item,
-  link: item.link || item.imageUrl,
-}));
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -48,13 +43,15 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [clothingItems, setClothingItems] = useState(normalizedDefaultItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [weatherType, setWeatherType] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState(null);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -223,16 +220,16 @@ function App() {
     setActiveModal("register");
   };
 
-  const handleCardLike = ({ _id, likes }) => {
+  const handleCardLike = (item) => {
     const token = localStorage.getItem("jwt");
-    const isLiked = likes.some((user) => user === currentUser._id);
+    const isLiked = item.likes.includes(currentUser._id);
 
     const likeAction = !isLiked ? addCardLike : removeCardLike;
 
-    likeAction(_id, token)
-      .then((updatedCard) => {
+    likeAction(item._id, token)
+      .then((updatedItem) => {
         setClothingItems((prevItems) =>
-          prevItems.map((item) => (item._id === _id ? updatedCard : item))
+          prevItems.map((i) => (i._id === updatedItem._id ? updatedItem : i))
         );
       })
       .catch((err) => {
@@ -245,6 +242,32 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser(null);
     navigate("/");
+  };
+
+  const openConfirmModal = (card) => {
+    setCardToDelete(card);
+    setIsConfirmOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (!cardToDelete) return;
+
+    const token = localStorage.getItem("jwt");
+    deleteItem(cardToDelete._id, token)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== cardToDelete._id)
+        );
+        setIsConfirmOpen(false);
+        setCardToDelete(null);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const closeConfirmModal = () => {
+    setIsConfirmOpen(false);
+    setCardToDelete(null);
   };
 
   return (
@@ -281,9 +304,11 @@ function App() {
                     <Profile
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
+                      onCardLike={handleCardLike}
                       handleAddClick={handleAddClick}
                       onEditProfile={handleEditProfileClick}
                       onSignOut={handleSignOut}
+                      openConfirmModal={openConfirmModal}
                     />
                   </ProtectedRoute>
                 }
@@ -300,6 +325,7 @@ function App() {
             card={selectedCard}
             onClose={closeActiveModal}
             onDelete={handleCardDelete}
+            onDeleteClick={openConfirmModal}
           />
           <RegisterModal
             isOpen={activeModal === "register"}
@@ -319,6 +345,19 @@ function App() {
             isOpen={isEditProfileOpen}
             onClose={() => setIsEditProfileOpen(false)}
             onUpdateUser={handleUpdateUser}
+          />
+
+          <ConfirmModal
+            isOpen={isConfirmOpen}
+            onClose={closeConfirmModal}
+            onConfirm={handleConfirmDelete}
+            message={
+              <>
+                Are you sure you want to delete this item?
+                <br />
+                <strong>This action is irreversible.</strong>
+              </>
+            }
           />
 
           <Footer />
