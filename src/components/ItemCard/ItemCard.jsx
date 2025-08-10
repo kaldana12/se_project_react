@@ -6,10 +6,10 @@ import CurrentUserContext from "../../context/CurrentUserContext"; // import con
 
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
-  console.log("currentUser._id:", currentUser._id);
 
   const isLoggedIn = Boolean(currentUser?._id);
 
+  const userId = currentUser?._id;
   const isLiked = isLoggedIn && item.likes.includes(currentUser._id);
   const likeButtonClassName = `card__like-button ${
     isLiked ? "card__like-button_liked" : ""
