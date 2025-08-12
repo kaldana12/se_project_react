@@ -82,8 +82,8 @@ function App() {
         const item = newItem.data;
         const normalizedItem = {
           ...item,
-          imageUrl: newItem.imageUrl || newItem.link,
-          link: newItem.link || newItem.imageUrl,
+          imageUrl: item.imageUrl || item.link,
+          link: item.link || item.imageUrl,
         };
 
         setClothingItems([normalizedItem, ...clothingItems]);
