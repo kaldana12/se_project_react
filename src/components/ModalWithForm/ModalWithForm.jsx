@@ -10,22 +10,6 @@ function ModalWithForm({
   onClose,
   onSubmit,
 }) {
-  useEffect(() => {
-    const handleEscClose = (e) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscClose);
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-    };
-  }, [isOpen, onClose]);
-
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content">

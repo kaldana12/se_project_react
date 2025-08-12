@@ -18,7 +18,7 @@ export default function RegisterModal({
 
   useEffect(() => {
     if (isOpen) {
-      setValues({ name: "", avatar: "", email: "", password: "" });
+      setValues({ name: "", avatarUrl: "", email: "", password: "" });
     }
   }, [isOpen, setValues]);
 

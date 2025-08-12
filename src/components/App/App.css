@@ -18,3 +18,7 @@ body {
   padding: 0 20px;
   flex: 1;
 }
+
+.modal_opened {
+  display: flex !important;
+}

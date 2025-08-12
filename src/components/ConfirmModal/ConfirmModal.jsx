@@ -10,7 +10,8 @@ function ConfirmModal({
   if (!isOpen) return null;
 
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+    <div className={`modal modal_type_confirm ${isOpen ? "modal_opened" : ""}`}>
+      <div className="modal__overlay" onClick={onClose} />
       <div className="modal__content">
         <p className="modal__message">{message}</p>
         <div className="modal__buttons">

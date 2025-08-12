@@ -15,7 +15,7 @@ function ItemModal({ isOpen, onClose, card, onDeleteClick }) {
     card.owner?._id === currentUser?._id || card.owner === currentUser?._id;
 
   return (
-    <div className={`modal ${isOpen && "modal_opened"}`}>
+    <div className={`modal modal_item ${isOpen && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
         <button onClick={onClose} type="button" className="modal__close">
           <img src={close} alt="Close" className="modal__close-button" />

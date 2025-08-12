@@ -12,6 +12,7 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.3s, opacity 0.3s;
+  z-index: 3;
 }
 
 .modal_opened {

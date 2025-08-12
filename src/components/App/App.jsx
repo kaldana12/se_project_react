@@ -79,9 +79,11 @@ function App() {
 
     addItem({ name, imageUrl, weather: weatherType }, token)
       .then((newItem) => {
+        const item = newItem.data;
         const normalizedItem = {
-          ...newItem,
-          imageUrl: newItem.imageUrl || newItem.link, // display fallback
+          ...item,
+          imageUrl: newItem.imageUrl || newItem.link,
+          link: newItem.link || newItem.imageUrl,
         };
 
         setClothingItems([normalizedItem, ...clothingItems]);
@@ -253,6 +255,7 @@ function App() {
     if (!cardToDelete) return;
 
     const token = localStorage.getItem("jwt");
+
     deleteItem(cardToDelete._id, token)
       .then(() => {
         setClothingItems((prevItems) =>
