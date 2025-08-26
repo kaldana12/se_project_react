@@ -1,6 +1,6 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https:/api.wtwrkproject.jumpingcrab.com"
+    ? "https://api.wtwrkproject.jumpingcrab.com"
     : "http://localhost:3001";
 
 export function checkResponse(res) {
