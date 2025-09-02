@@ -12,4 +12,4 @@ sprint 13 project: https://github.com/kaldana12/se_project_express.git
 
 ## Technologies
 
-This project uses React, React router to handle different pages, Context API, Fetch API, CSS, LocalStorage, JSX, Node.js, and MongoDB.
+This project uses React, React router to handle different pages, Context API, Fetch API, CSS, LocalStorage, JSX, Node.js, MongoDB, and VM.
