@@ -1,6 +1,6 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://api.wtwrkproject.jumpingcrab.com"
+    ? "https://vernal-zone-469711-g5.uk.r.appspot.com"
     : "http://localhost:3001";
 
 export function checkResponse(res) {
