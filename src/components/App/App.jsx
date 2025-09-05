@@ -130,8 +130,8 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then((data) => {
-        const normalizedData = data.map((item) => ({
+      .then((res) => {
+        const normalizedData = res.data.map((item) => ({
           ...item,
           link: item.link || item.imageUrl,
         }));

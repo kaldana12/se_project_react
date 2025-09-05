@@ -55,3 +55,10 @@
   cursor: pointer;
   padding: 0;
 }
+
+.card__like-button_liked {
+  background: #000;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
